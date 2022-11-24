@@ -4,6 +4,17 @@
     gather_subset: [virtual]
   when: ansible_virtualization_type is not defined
 
+- name: "Include OS Family Specific Variables"
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_os_family | lower }}.yml"
+        - "empty.yml"
+      paths:
+        - "vars"
+  tags: [always]
+
 - name: general setup
   include_tasks: general-setup.yml
   when: ansible_virtualization_type != 'lxc' or atop_role_test_mode

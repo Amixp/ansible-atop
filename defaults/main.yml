@@ -1,10 +1,4 @@
 ---
-
-atop_packages:
-  - cron
-  - atop
-  - acct
-
 atop_daemon_interval: 300
 atop_user_interval: 1
 atop_flags: 1fpaA
